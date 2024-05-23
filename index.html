@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam Krofian - Personal Webpage</title>
+    <style>
+        :root {
+            --framer-font-family: 'Inter', sans-serif;
+            --framer-font-style: normal;
+            --framer-font-weight: 400;
+            --framer-text-color: yellow;
+            --framer-font-size: 16px;
+            --framer-font-size-scale: 1;
+            --framer-text-transform: none;
+            --framer-text-decoration: none;
+            --framer-custom-cursors: pointer;
+        }
+
+        body {
+            font-family: var(--framer-link-font-family, var(--framer-font-family));
+            font-style: var(--framer-link-font-style, var(--framer-font-style));
+            font-weight: var(--framer-link-font-weight, var(--framer-font-weight));
+            color: var(--framer-link-text-color, yellow);
+            font-size: calc(var(--framer-link-font-size, var(--framer-font-size)) * var(--framer-font-size-scale));
+            text-transform: var(--framer-link-text-transform, none);
+            text-decoration: var(--framer-link-text-decoration, none);
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: black;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-family: var(--framer-link-font-family, var(--framer-font-family));
+            font-style: var(--framer-link-font-style, var(--framer-font-style));
+            font-weight: var(--framer-link-font-weight, var(--framer-font-weight));
+            color: yellow;
+        }
+        nav {
+            display: flex;
+            justify-content: flex-end;
+        }
+        nav a {
+            color: yellow;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+            font-family: var(--framer-link-font-family, var(--framer-font-family));
+            font-style: var(--framer-link-font-style, var(--framer-font-style));
+            font-weight: var(--framer-link-font-weight, var(--framer-font-weight));
+            font-size: calc(var(--framer-link-font-size, var(--framer-font-size)) * var(--framer-font-size-scale));
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            text-align: center;
+            flex-direction: column;
+        }
+        .hero h1 {
+            font-size: 6em;
+            line-height: 1.2;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            color: yellow;
+        }
+        .hero p {
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: yellow;
+        }
+        .sine-wave {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border: 1px solid yellow;
+            background-color: transparent;
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: sineWave 5s infinite, fadeInOut 5s infinite;
+        }
+        @keyframes sineWave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+        }
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .section {
+            display: flex;
+            align-items: flex-start;
+            padding: 50px 20px;
+            height: 100vh;
+            color: yellow;
+        }
+        .section img {
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(50%) contrast(70%);
+            position: relative;
+        }
+        .section img::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/ebh1foAAAAASUVORK5CYII=') repeat;
+            opacity: 0.2;
+        }
+        .section-content {
+            width: 50%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .section-content h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .section-content p {
+            font-size: 1.2em;
+            line-height: 1.5;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: yellow;
+            font-family: var(--framer-link-font-family, var(--framer-font-family));
+            font-style: var(--framer-link-font-style, var(--framer-font-style));
+            font-weight: var(--framer-link-font-weight, var(--framer-font-weight));
+            font-size: calc(var(--framer-link-font-size, var(--framer-font-size)) * var(--framer-font-size-scale));
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const navLinks = document.querySelectorAll("nav a");
+
+            navLinks.forEach(link => {
+                link.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute("href").substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: "smooth"
+                    });
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>A-K</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#music">Music</a>
+            <a href="#it">IT</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <div class="hero">
+        <h1>ADAM<br>KROFIAN</h1>
+        <p>Guitar Player | Music Producer | Software Developer</p>
+        <div class="sine-wave">
+            <!-- Create 64 dots for the sine wave -->
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 0);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 1);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 2);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 3);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 4);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 5);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 6);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 7);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 8);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 9);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 10);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 11);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 12);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 13);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 14);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 15);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 16);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 17);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 18);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 19);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 20);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 21);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 22);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 23);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 24);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 25);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 26);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 27);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 28);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 29);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 30);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 31);"></div>
+            <div class="dot" style="animation-delay: calc(0s + 0.05s * 32);"></div>
+        </div>
+    </div>
+    <section id="about" class="section">
+        <img src="https://loremflickr.com/800/800" alt="About Me Background">
+        <div class="section-content">
+            <h2>About Me</h2>
+            <p>My name is Adam Krofian, I'm a guitar player, music producer, and a software developer. My standout skill lies in effectively communicating with non-technical individuals, understanding their needs, and guiding their goals throughout the entire project lifecycle.</p>
+        </div>
+    </section>
+    <section id="music" class="section">
+        <img src="https://loremflickr.com/801/801" alt="Music Background">
+        <div class="section-content">
+            <h2>Music</h2>
+            <p>My parallel career lies in music: I front my own band (The Atavists) that won a couple of prestigious Czech music academy awards. I have been lucky enough to work with some of my heroes on various music endeavors, including the legendary Czech rap group PSH and composer Michal Pavlíček, as well as doing many sessions in between.</p>
+        </div>
+    </section>
+    <section id="it" class="section">
+        <img src="https://loremflickr.com/802/802" alt="IT Background">
+        <div class="section-content">
+            <h2>IT</h2>
+            <p>As a software developer, I specialize in bridging the gap between technical and non-technical stakeholders. I am skilled at understanding client needs and translating them into actionable project goals, ensuring that projects are completed successfully from start to finish.</p>
+        </div>
+    </section>
+    <section id="contact" class="section">
+        <img src="https://loremflickr.com/803/803" alt="Contact Background">
+        <div class="section-content">
+            <h2>Contact Information</h2>
+            <p>You can reach me via email at: <a href="mailto:adam@example.com" style="color: yellow;">adam@example.com</a></p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Adam Krofian. All rights reserved.</p>
+    </footer>
+</body>
+</html>
